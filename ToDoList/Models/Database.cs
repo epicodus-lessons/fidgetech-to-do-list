@@ -1,6 +1,4 @@
 using MySql.Data.MySqlClient;
-using System;
-using ToDoList;
 
 namespace ToDoList.Models
 {
