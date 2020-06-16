@@ -42,7 +42,7 @@ namespace ToDoList.Controllers
 
         public ActionResult Edit(int id)
         {
-            var thisItem = _db.Items.FirstOrDefault(item => item.ItemId == id);
+            Item thisItem = _db.Items.FirstOrDefault(item => item.ItemId == id);
             return View(thisItem);
         }
 
