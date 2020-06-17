@@ -1,0 +1,23 @@
+@{
+    Layout = "_Layout";
+}
+
+@using ToDoList.ViewModels
+
+@model RegisterViewModel
+
+<h2>Register a new user</h2>
+<hr />
+@using (Html.BeginForm("Register", "Accounts"))
+{
+    @Html.LabelFor(model => model.Email)
+    @Html.TextBoxFor(model=> model.Email)
+
+    @Html.LabelFor(model => model.Password)
+    @Html.PasswordFor(model=> model.Password)
+
+    @Html.LabelFor(model => model.ConfirmPassword)
+    @Html.PasswordFor(model => model.ConfirmPassword)
+
+    <input type="submit" value="Register" />
+}
