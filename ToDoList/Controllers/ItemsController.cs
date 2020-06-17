@@ -51,7 +51,7 @@ namespace ToDoList.Controllers
         // public ActionResult Edit(int id)
         // {
         //     Item thisItem = _db.Items.FirstOrDefault(item => item.ItemId == id);
-        //     ViewBag.Categories = new SelectList(_db.Categories, "CategoryId", "Name");
+        //     ViewBag.CategoryId = new SelectList(_db.Categories, "CategoryId", "Name");
         //     return View(thisItem);
         // }
 
