@@ -1,3 +1,19 @@
+// You should be updating this controller and views on your own as practice:
+
+// see lesson 3.3.2.5 - Relationships with Entity Framework
+// https://www.learnhowtoprogram.com/fidgetech-3-c-and-net/3-3-database-basics/3-3-2-5-relationships-with-entity-framework :
+
+// Adding a Controller and Views
+
+/* Next, we need to update our CategoriesController and replace the CRUD actions with
+our new Entity-backed ones. This controller will look like the ItemsController we
+completed in the last lesson. Because we've already covered this functionality, take
+the opportunity to practice building out this controller and its corresponding views
+on your own. You'll get a chance to do this on your next project. Use the
+Categories/Index view to display a list of categories. In order to see the CRUD
+functionality in action, let's go ahead and add a link in the homepage 
+(Home/Index.cshtml) to go to our categories index view. */
+
 // using Microsoft.AspNetCore.Mvc;
 // using System.Collections.Generic;
 // using ToDoList.Models;
