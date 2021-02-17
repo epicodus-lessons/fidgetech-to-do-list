@@ -56,11 +56,12 @@ namespace ToDoList.Controllers
         }
 
         [HttpPost]
-        public ActionResult Edit(Item item, int CategoryId)
+        public ActionResult Edit(Item item, int categoryId)
         {
-            if (CategoryId != 0)
+            bool duplicate = _db.CategoryItem.Any(catItem => catItem.CategoryId == categoryId && catItem.ItemId == item.ItemId);
+            if (categoryId != 0 && !duplicate)
             {
-                _db.CategoryItem.Add(new CategoryItem() { CategoryId = CategoryId, ItemId = item.ItemId });
+                _db.CategoryItem.Add(new CategoryItem() { CategoryId = categoryId, ItemId = item.ItemId });
             }
             _db.Entry(item).State = EntityState.Modified;
             _db.SaveChanges();
@@ -75,11 +76,12 @@ namespace ToDoList.Controllers
         }
 
         [HttpPost]
-        public ActionResult AddCategory(Item item, int CategoryId)
+        public ActionResult AddCategory(Item item, int categoryId)
         {
-            if (CategoryId != 0)
+            bool duplicate = _db.CategoryItem.Any(catItem => catItem.CategoryId == categoryId && catItem.ItemId == item.ItemId);
+            if (categoryId != 0 && !duplicate)
             {
-                _db.CategoryItem.Add(new CategoryItem() { CategoryId = CategoryId, ItemId = item.ItemId });
+                _db.CategoryItem.Add(new CategoryItem() { CategoryId = categoryId, ItemId = item.ItemId });
             }
             _db.SaveChanges();
             return RedirectToAction("Index");
