@@ -14,7 +14,7 @@ namespace ToDoList.Controllers
         }
 
         [HttpGet("/items/new")]
-        public ActionResult CreateForm()
+        public ActionResult New()
         {
             return View();
         }
@@ -24,6 +24,13 @@ namespace ToDoList.Controllers
         {
             Item myItem = new Item(description);
             return RedirectToAction("Index");
+        }
+
+        [HttpGet("/items/{id}")]
+        public ActionResult Show(int id)
+        {
+            Item foundItem = Item.Find(id);
+            return View(foundItem);
         }
 
         [HttpPost("/items/delete")]
