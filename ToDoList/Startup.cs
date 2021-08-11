@@ -27,7 +27,7 @@ namespace ToDoList
         {
             app.UseDeveloperExceptionPage();
             app.UseRouting();
-            app.UseStaticFiles(); //THIS IS NEW
+            app.UseStaticFiles();
 
             app.UseEndpoints(routes =>
             {
@@ -39,5 +39,10 @@ namespace ToDoList
                 await context.Response.WriteAsync("Hello, I didn't find a route!");
             });
         }
+    }
+
+    public static class DBConfiguration
+    {
+        public static string ConnectionString = "server=localhost;user id=root;password=epicodus;port=3306;database=to_do_list;";
     }
 }
