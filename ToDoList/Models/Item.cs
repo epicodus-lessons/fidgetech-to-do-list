@@ -27,6 +27,7 @@ namespace ToDoList.Models
             MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
             cmd.CommandText = "SELECT * FROM items;";
             MySqlDataReader rdr = cmd.ExecuteReader() as MySqlDataReader;
+
             while (rdr.Read())
             {
                 int itemId = rdr.GetInt32(0);
@@ -34,6 +35,7 @@ namespace ToDoList.Models
                 Item newItem = new Item(itemDescription, itemId);
                 allItems.Add(newItem);
             }
+
             conn.Close();
             if (conn != null)
             {
@@ -41,8 +43,20 @@ namespace ToDoList.Models
             }
             return allItems;
         }
+
         public static void ClearAll()
         {
+            MySqlConnection conn = DB.Connection();
+            conn.Open();
+            MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
+            cmd.CommandText = "DELETE FROM items;";
+            cmd.ExecuteNonQuery();
+            conn.Close();
+
+            if (conn != null)
+            {
+                conn.Dispose();
+            }
         }
 
         public static Item Find(int searchId)
