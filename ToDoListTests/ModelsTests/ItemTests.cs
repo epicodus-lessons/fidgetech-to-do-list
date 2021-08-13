@@ -76,10 +76,11 @@ namespace ToDoListTests
             Item newItem = new Item(description);
 
             // Act
-            int result = newItem.Id;
+            newItem.Save();
+            Item foundItem = Item.Find(newItem.Id);
 
             // Assert
-            Assert.AreEqual(1, result);
+            Assert.AreEqual(foundItem.Id, newItem.Id);
         }
 
         [TestMethod]
@@ -130,19 +131,19 @@ namespace ToDoListTests
         }
 
         [TestMethod]
-        public void Find_ReturnsCorrectItem_Item()
+        public void Find_ReturnsCorrectItemFromDatabase_Item()
         {
             // Arrange
-            string description01 = "Walk the dog";
-            string description02 = "Wash the dishes";
-            Item newItem1 = new Item(description01);
-            Item newItem2 = new Item(description02);
+            Item newItem = new Item("Mow the lawn");
+            newItem.Save();
+            Item newItem2 = new Item("Wash dishes");
+            newItem2.Save();
 
             // Act
-            Item result = Item.Find(2);
+            Item foundItem = Item.Find(newItem.Id);
 
             // Assert
-            Assert.AreEqual(newItem2, result);
+            Assert.AreEqual(newItem, foundItem);
         }
     }
 }
