@@ -2,10 +2,9 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
-using ToDoList;
 using ToDoList.Models;
 
-namespace ToDoListTests
+namespace ToDoList.Tests
 {
     [TestClass]
     public class ItemTests : IDisposable
