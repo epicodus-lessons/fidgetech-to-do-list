@@ -1,3 +1,4 @@
 obj/
 bin/
 .vscode/
+# your gitignore should include appsettings.json, our example repo will keep it for demonstration purposes 
