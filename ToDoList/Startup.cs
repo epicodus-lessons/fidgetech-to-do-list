@@ -8,6 +8,8 @@ namespace ToDoList
 {
     public class Startup
     {
+        public IConfigurationRoot Configuration { get; }
+
         public Startup(IWebHostEnvironment env)
         {
             IConfigurationBuilder builder = new ConfigurationBuilder()
@@ -15,8 +17,6 @@ namespace ToDoList
                 .AddEnvironmentVariables();
             Configuration = builder.Build();
         }
-
-        public IConfigurationRoot Configuration { get; }
 
         public void ConfigureServices(IServiceCollection services)
         {
