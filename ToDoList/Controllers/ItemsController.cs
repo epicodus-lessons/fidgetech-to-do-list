@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 using ToDoList.Models;
@@ -35,6 +36,20 @@ namespace ToDoList.Controllers
         public ActionResult Create(Item item)
         {
             _db.Items.Add(item);
+            _db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult Edit(int id)
+        {
+            Item thisItem = _db.Items.FirstOrDefault(item => item.ItemId == id);
+            return View(thisItem);
+        }
+
+        [HttpPost]
+        public ActionResult Edit(Item item)
+        {
+            _db.Entry(item).State = EntityState.Modified;
             _db.SaveChanges();
             return RedirectToAction("Index");
         }
