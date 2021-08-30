@@ -37,34 +37,41 @@ namespace ToDoList.Controllers
         }
 
         [HttpPost]
-        public ActionResult Create(Item item, int CategoryId)
+        public ActionResult Create(Item item, int categoryId)
         {
             _db.Items.Add(item);
             _db.SaveChanges();
 
-            if (CategoryId != 0)
+            if (categoryId != 0)
             {
-                _db.CategoriesItems.Add(new CategoryItem() { CategoryId = CategoryId, ItemId = item.ItemId });
+                _db.CategoriesItems.Add(new CategoryItem() { CategoryId = categoryId, ItemId = item.ItemId });
                 _db.SaveChanges();
             }
 
             return RedirectToAction("Index");
         }
 
-        // public ActionResult Edit(int id)
-        // {
-        //     Item thisItem = _db.Items.FirstOrDefault(item => item.ItemId == id);
-        //     ViewBag.CategoryId = new SelectList(_db.Categories, "CategoryId", "Name");
-        //     return View(thisItem);
-        // }
+        public ActionResult Edit(int id)
+        {
+            Item thisItem = _db.Items.FirstOrDefault(item => item.ItemId == id);
+            ViewBag.CategoryId = new SelectList(_db.Categories, "CategoryId", "Name");
+            return View(thisItem);
+        }
 
-        // [HttpPost]
-        // public ActionResult Edit(Item item)
-        // {
-        //     _db.Entry(item).State = EntityState.Modified;
-        //     _db.SaveChanges();
-        //     return RedirectToAction("Index");
-        // }
+        [HttpPost]
+        public ActionResult Edit(Item item, int categoryId)
+        {
+            bool duplicate = _db.CategoriesItems.Any(catItem =>
+              catItem.CategoryId == categoryId && catItem.ItemId == item.ItemId);
+
+            if (categoryId != 0 && !duplicate)
+            {
+                _db.CategoriesItems.Add(new CategoryItem() { CategoryId = categoryId, ItemId = item.ItemId });
+            }
+            _db.Entry(item).State = EntityState.Modified;
+            _db.SaveChanges();
+            return RedirectToAction("Index");
+        }
 
         //         public ActionResult Delete(int id)
         //         {
