@@ -37,14 +37,14 @@ namespace ToDoList.Controllers
         }
 
         [HttpPost]
-        public ActionResult Create(Item item, int CategoryId)
+        public ActionResult Create(Item item, int categoryId)
         {
             _db.Items.Add(item);
             _db.SaveChanges();
 
-            if (CategoryId != 0)
+            if (categoryId != 0)
             {
-                _db.CategoriesItems.Add(new CategoryItem() { CategoryId = CategoryId, ItemId = item.ItemId });
+                _db.CategoriesItems.Add(new CategoryItem() { CategoryId = categoryId, ItemId = item.ItemId });
                 _db.SaveChanges();
             }
 
