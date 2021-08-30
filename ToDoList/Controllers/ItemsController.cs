@@ -30,34 +30,41 @@ namespace ToDoList.Controllers
             return View(thisItem);
         }
 
-        //         public ActionResult Create()
-        //         {
-        //             ViewBag.CategoryId = new SelectList(_db.Categories, "CategoryId", "Name");
-        //             return View();
-        //         }
+        public ActionResult Create()
+        {
+            ViewBag.CategoryId = new SelectList(_db.Categories, "CategoryId", "Name");
+            return View();
+        }
 
-        //         [HttpPost]
-        //         public ActionResult Create(Item item)
-        //         {
-        //             _db.Items.Add(item);
-        //             _db.SaveChanges();
-        //             return RedirectToAction("Index");
-        //         }
+        [HttpPost]
+        public ActionResult Create(Item item, int CategoryId)
+        {
+            _db.Items.Add(item);
+            _db.SaveChanges();
 
-        //         public ActionResult Edit(int id)
-        //         {
-        //             Item thisItem = _db.Items.FirstOrDefault(item => item.ItemId == id);
-        //             ViewBag.CategoryId = new SelectList(_db.Categories, "CategoryId", "Name");
-        //             return View(thisItem);
-        //         }
+            if (CategoryId != 0)
+            {
+                _db.CategoriesItems.Add(new CategoryItem() { CategoryId = CategoryId, ItemId = item.ItemId });
+                _db.SaveChanges();
+            }
 
-        //         [HttpPost]
-        //         public ActionResult Edit(Item item)
-        //         {
-        //             _db.Entry(item).State = EntityState.Modified;
-        //             _db.SaveChanges();
-        //             return RedirectToAction("Index");
-        //         }
+            return RedirectToAction("Index");
+        }
+
+        // public ActionResult Edit(int id)
+        // {
+        //     Item thisItem = _db.Items.FirstOrDefault(item => item.ItemId == id);
+        //     ViewBag.CategoryId = new SelectList(_db.Categories, "CategoryId", "Name");
+        //     return View(thisItem);
+        // }
+
+        // [HttpPost]
+        // public ActionResult Edit(Item item)
+        // {
+        //     _db.Entry(item).State = EntityState.Modified;
+        //     _db.SaveChanges();
+        //     return RedirectToAction("Index");
+        // }
 
         //         public ActionResult Delete(int id)
         //         {
