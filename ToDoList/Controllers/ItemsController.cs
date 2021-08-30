@@ -62,13 +62,35 @@ namespace ToDoList.Controllers
         public ActionResult Edit(Item item, int categoryId)
         {
             bool duplicate = _db.CategoriesItems.Any(catItem =>
-              catItem.CategoryId == categoryId && catItem.ItemId == item.ItemId);
+                catItem.CategoryId == categoryId && catItem.ItemId == item.ItemId);
 
             if (categoryId != 0 && !duplicate)
             {
                 _db.CategoriesItems.Add(new CategoryItem() { CategoryId = categoryId, ItemId = item.ItemId });
             }
             _db.Entry(item).State = EntityState.Modified;
+            _db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult AddCategory(int id)
+        {
+            Item thisItem = _db.Items.FirstOrDefault(item => item.ItemId == id);
+            ViewBag.CategoryId = new SelectList(_db.Categories, "CategoryId", "Name");
+            return View(thisItem);
+        }
+
+        [HttpPost]
+        public ActionResult AddCategory(Item item, int categoryId)
+        {
+            bool duplicate = _db.CategoriesItems.Any(join =>
+              join.CategoryId == categoryId && join.ItemId == item.ItemId);
+
+            if (categoryId != 0 && !duplicate)
+            {
+                _db.CategoriesItems.Add(new CategoryItem() { CategoryId = categoryId, ItemId = item.ItemId });
+            }
+
             _db.SaveChanges();
             return RedirectToAction("Index");
         }
