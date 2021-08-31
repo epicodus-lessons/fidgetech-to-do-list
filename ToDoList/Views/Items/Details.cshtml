@@ -2,6 +2,7 @@
     Layout = "_Layout";
 }
 
+@using ToDoList.Models;
 @model ToDoList.Models.Item
 
 <h2>Item Details</h2>
@@ -16,7 +17,7 @@ else
 {
     <h4>Categories the item belongs to:</h4>
     <ul>
-        @foreach (var join in Model.JoinEntities)
+        @foreach (CategoryItem join in Model.JoinEntities)
         {
             <li>@join.Category.Name</li>
         }
