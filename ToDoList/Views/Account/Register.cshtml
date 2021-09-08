@@ -12,15 +12,12 @@
 {
     @Html.LabelFor(user => user.Email)
     @Html.TextBoxFor(user => user.Email)
-    @* @Html.ValidationMessageFor(user => user.Email, "", new { @class = "text-danger" }) *@
 
     @Html.LabelFor(user => user.Password)
     @Html.PasswordFor(user => user.Password)
-    @* @Html.ValidationMessageFor(user => user.Password, "", new { @class = "text-danger" }) *@
 
     @Html.LabelFor(user => user.ConfirmPassword)
     @Html.PasswordFor(user => user.ConfirmPassword)
-    @* @Html.ValidationMessageFor(user => user.ConfirmPassword, "", new { @class = "text-danger" }) *@
 
     <input type="submit" value="Register" />
 }
