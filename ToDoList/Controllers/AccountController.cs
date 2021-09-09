@@ -63,7 +63,7 @@ namespace ToDoList.Controllers
                 }
                 else
                 {
-                    ModelState.AddModelError("Error", "Email and password do not match");
+                    ModelState.AddModelError("Error", "Login was unsuccessful, check your email and password.");
                     return View();
                 }
             }
