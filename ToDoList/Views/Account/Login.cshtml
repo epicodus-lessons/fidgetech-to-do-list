@@ -1,5 +1,5 @@
 @{
-    Layout = "_Layout";
+  Layout = "_Layout";
 }
 
 @using ToDoList.ViewModels
@@ -8,13 +8,16 @@
 
 <h2>Log in with your account</h2>
 <hr />
+
 @using (Html.BeginForm())
 {
-    @Html.LabelFor(user => user.Email)
-    @Html.EditorFor(user => user.Email)
+  @Html.LabelFor(model => model.Email)
+  @Html.TextBoxFor(model => model.Email)
 
-    @Html.LabelFor(user => user.Password)
-    @Html.PasswordFor(user => user.Password)
+  @Html.LabelFor(model => model.Password)
+  @Html.PasswordFor(model => model.Password)
 
-    <input type="submit" value="Log in" class="btn btn-default" />
+  <input type="submit" value="Log in" class="btn btn-default" />
 }
+
+@Html.ValidationSummary(false, "", new { @class = "text-danger" })
